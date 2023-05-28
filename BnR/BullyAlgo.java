@@ -1,54 +1,72 @@
 package BnR;
-import java.io.*;
-import java.util.Scanner;
 
-// create class BullyAlgoExample to understand how bully algorithms works  
-class BullyAlgo{
+import java.util.ArrayList;
+import java.util.List;
 
-    static int numberOfProcess;
-    static int priorities[] = new int[100];
-    static int status[] = new int[100];
-    static int cord;
+class Process {
+    private int id;
+    private boolean isCoordinator;
 
-    public static void main(String args[])
-            throws IOException {
-        // get input from the user for the number of processes
-        System.out.println("Enter total number of processes:");
-
-        // create scanner class object to get input from user
-        Scanner sc = new Scanner(System.in);
-        numberOfProcess = sc.nextInt();
-
-        int i;
-
-        // use for loop to set priority and status of each process
-        for (i = 0; i < numberOfProcess; i++) {
-            System.out.println("Status for process " + (i + 1) + ":");
-            status[i] = sc.nextInt();
-            System.out.println("Priority of process " + (i + 1) + ":");
-            priorities[i] = sc.nextInt();
-        }
-
-        System.out.println("Enter proces which will initiate election");
-        int ele = sc.nextInt();
-
-        sc.close();
-
-        // call electProcess() method
-        electProcess(ele);
-        System.out.println("After electing process the final coordinator is " + cord);
+    public Process(int id) {
+        this.id = id;
+        this.isCoordinator = false;
     }
 
-    // create electProcess() method
-    static void electProcess(int ele) {
-        ele = ele - 1;
-        cord = ele + 1;
+    public int getId() {
+        return id;
+    }
 
-        for (int i = 0; i < numberOfProcess; i++) {
-            if (priorities[ele] < priorities[i]) {
-                System.out.println("Election message is sent from " + (ele + 1) + " to " + (i + 1));
-                if (status[i] == 1)
-                    electProcess(i + 1);
+    public boolean isCoordinator() {
+        return isCoordinator;
+    }
+
+    public void setCoordinator(boolean coordinator) {
+        isCoordinator = coordinator;
+    }
+
+    public void startElection(List<Process> processes) {
+        for (Process p : processes) {
+            if (p.getId() > this.id) {
+                System.out.println("Process " + this.id + " sends Election message to Process " + p.getId());
+                p.respondToElection();
+            }
+        }
+        setCoordinator(true);
+        System.out.println("Process " + this.id + " declares itself as the new leader.");
+        informCoordinator(processes);
+    }
+
+    public void respondToElection() {
+        System.out.println("Process " + this.id + " sends OK message back.");
+    }
+
+    public void informCoordinator(List<Process> processes) {
+        for (Process p : processes) {
+            if (p != this) {
+                p.setCoordinator(false);
+                System.out.println("Process " + this.id + " sends Coordinator message to Process " + p.getId());
+            }
+        }
+    }
+}
+
+public class BullyAlgo {
+    public static void main(String[] args) {
+        List<Process> processes = new ArrayList<>();
+        processes.add(new Process(1));
+        processes.add(new Process(2));
+        processes.add(new Process(3));
+        processes.add(new Process(4));
+        processes.add(new Process(5));
+
+        // Assume process 1 detects the leader failure and starts the election
+        processes.get(0).startElection(processes);
+
+        // Check the new leader
+        for (Process p : processes) {
+            if (p.isCoordinator()) {
+                System.out.println("Process " + p.getId() + " is the new leader.");
+                break;
             }
         }
     }
