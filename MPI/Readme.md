@@ -1,4 +1,4 @@
-Installation of OPENMPI
+Installation of openMPI
 1. Download openmpi-4.1.4.tar.bz2 from http://www.open-mpi.org in a folder say LP5.
 2. Goto the terminal (Command prompt)
 3. update using
