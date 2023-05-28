@@ -68,3 +68,4 @@ Applications of CORBA
     Enterprise application integration
     Internet of Things (IoT) platforms
     Distributed control systems.
+ 
