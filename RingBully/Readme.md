@@ -1,3 +1,10 @@
+Compile using 
+    javac Bully.java
+    javac Ring.java
+Run using 
+    java Bully
+    java Ring
+
 
 QA 
 
