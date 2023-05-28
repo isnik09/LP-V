@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class MyServer {
+public class Server {
     public static void main(String[] args) throws Exception{
         
         //Creating a port for communication
