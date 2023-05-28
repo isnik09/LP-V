@@ -6,6 +6,7 @@ In Second terminal
     javac Client.java
     java ./Client
 
+
 What is Interprocess communication 
     IPC refers to the mechanisms and techniques used for communication between different processes running on different machines within a distributed system. It enables processes to exchange data, coordinate activities, and synchronize their execution across multiple nodes in a distributed environment.
     IPC Mechanisms : Message Passing, Remote Procedure Call (RPC), Publish-Subscribe, Data Streams etc.
@@ -55,3 +56,11 @@ What is shared memory programming?
     Shared memory programming refers to a programming paradigm that allows multiple processes or threads to access and manipulate a common region of memory, known as shared memory. It enables efficient and fast communication and data sharing between these processes or threads, as they can directly read from and write to the shared memory region. 
     Pros : Communication and Data Sharing, Efficiency, Synchronization, Parallel Processing
 
+
+What is a port? It's applications...
+    A port refers to a logical construct that allows multiple processes or applications to share a single physical network interface or network connection on a computer.
+    Port 80 is used for HTTP (Hypertext Transfer Protocol) web traffic.
+    Port 443 is used for HTTPS (HTTP Secure) encrypted web traffic.
+    Port 25 is used for SMTP (Simple Mail Transfer Protocol) for email transmission.
+    Port 22 is used for SSH (Secure Shell) for secure remote access.
+    Port 53 is used for DNS (Domain Name System) for domain name resolution.
